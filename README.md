@@ -24,6 +24,16 @@ Mahdizadeh, S. J.; Eriksson, L. A. MolAI: A Deep Learning Framework for Data-Dri
 
 ## Build
 
+A ready-to-use Docker image is available on Docker Hub:
+
+```bash
+docker pull 951753jalil/ilp:latest
+```
+
+Docker Hub page: https://hub.docker.com/r/951753jalil/ilp
+
+You can also build the image locally from this repository:
+
 ```bash
 docker build -t ilp:latest .
 ```
@@ -46,7 +56,7 @@ GPU-capable run:
 docker run --rm \
   --gpus all \
   -v "$PWD:/work" \
-  ilp:latest \
+  951753jalil/ilp:latest \
   --input /work/input.csv \
   --output /work/prepped_SMILES.csv \
   --discarded-output /work/discarded_molecules.csv
@@ -57,7 +67,7 @@ CPU-only run:
 ```bash
 docker run --rm \
   -v "$PWD:/work" \
-  ilp:latest \
+  951753jalil/ilp:latest \
   --device cpu \
   --input /work/input.csv \
   --output /work/prepped_SMILES.csv \
@@ -138,7 +148,7 @@ The CPU and GPU full-output files were byte-identical after deterministic near-t
 ## Development Checks
 
 ```bash
-docker run --rm --entrypoint python ilp:latest -m unittest discover -s /app/tests
+docker run --rm --entrypoint python 951753jalil/ilp:latest -m unittest discover -s /app/tests
 ```
 
 The bundled `models/ilp/ilp_model.pt` file is tracked with Git LFS.
