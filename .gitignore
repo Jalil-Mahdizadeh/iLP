@@ -7,14 +7,18 @@ __pycache__/
 venv/
 
 # Local and generated iLP data products
+input.csv
 SMILES_canonical.csv
 dimorph_canonical.csv
 prepped_SMILES.csv
+discarded_molecules.csv
 out_canonicalizer.txt
 out_dimorphite.txt
 tmp/
+tmp_*/
 outputs/
 .cuda_cache/
+reports/
 
 # OS/editor noise
 .DS_Store

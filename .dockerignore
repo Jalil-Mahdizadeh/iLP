@@ -7,6 +7,8 @@ __pycache__/
 .venv/
 venv/
 .cuda_cache/
+reports/
+outputs/
 
 # Generated pipeline outputs; the image only needs source, models, and examples.
 *.csv

@@ -4,7 +4,26 @@ import re
 import tempfile
 from pathlib import Path
 
-from iLP_run import DEFAULT_ALLOWED_CHARACTERS, iter_filtered_protonation_groups, iter_group_safe_batches
+from ilp.pipeline import (
+    DEFAULT_ALLOWED_CHARACTERS,
+    iter_filtered_protonation_groups,
+    iter_group_safe_batches,
+    score_batch,
+)
+
+
+class DummyBundle:
+    def __init__(self, probabilities):
+        self.probabilities = probabilities
+        self.offset = 0
+
+    def __call__(self, x_batch):
+        import torch
+
+        end = self.offset + len(x_batch)
+        values = self.probabilities[self.offset:end]
+        self.offset = end
+        return torch.tensor(values, dtype=torch.float32)
 
 
 class GroupSafeBatchingTests(unittest.TestCase):
@@ -53,6 +72,26 @@ class GroupSafeBatchingTests(unittest.TestCase):
         self.assertEqual(groups[1].target, "id-bad")
         self.assertEqual(groups[1].rows, [])
         self.assertEqual(groups[1].invalid_character_rows, 1)
+
+    def test_score_batch_selects_one_state_per_group(self):
+        rows, group_count = score_batch(
+            [
+                ("CCO", "mol-a", "group-a"),
+                ("CCN", "mol-a", "group-a"),
+                ("CO", "mol-b", "group-b"),
+                ("CN", "mol-b", "group-b"),
+            ],
+            bundle=DummyBundle([0.2, 0.8, 0.7, 0.700001]),
+            device="cpu",
+            char_to_int={"!": 0, "$": 1, "%": 2, "C": 3, "O": 4, "N": 5},
+            max_smi_len=8,
+            inference_batch_size=2,
+            tie_policy="first",
+            selection_atol=2e-5,
+        )
+
+        self.assertEqual(group_count, 2)
+        self.assertEqual(rows, [("CCN", "mol-a"), ("CO", "mol-b")])
 
 
 if __name__ == "__main__":

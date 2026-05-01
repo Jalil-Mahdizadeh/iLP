@@ -1,8 +1,7 @@
-FROM tensorflow/tensorflow:2.7.1-gpu
+FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
 
 ENV PYTHONUNBUFFERED=1 \
-    TF_CPP_MIN_LOG_LEVEL=3 \
-    PYTHONPATH=/app \
+    PYTHONPATH=/app/src \
     CUDA_CACHE_PATH=/work/.cuda_cache \
     CUDA_CACHE_MAXSIZE=2147483648 \
     NVIDIA_VISIBLE_DEVICES=all \
@@ -14,13 +13,13 @@ COPY requirements.txt .
 RUN python -m pip install --no-cache-dir --upgrade pip==25.0.1 \
     && python -m pip install --no-cache-dir -r requirements.txt
 
-COPY iLP_run.py README.md ./
-COPY iLP ./iLP
-COPY MolAI ./MolAI
+COPY src ./src
+COPY iLP_run.py README.md CITATION.cff ./
+COPY models/ilp ./models/ilp
 COPY examples ./examples
 COPY tests ./tests
 
 WORKDIR /work
 
-ENTRYPOINT ["python", "/app/iLP_run.py"]
+ENTRYPOINT ["python", "-m", "ilp.pipeline"]
 CMD ["--help"]
