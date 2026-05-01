@@ -17,6 +17,7 @@ Mahdizadeh, S. J.; Eriksson, L. A. MolAI: A Deep Learning Framework for Data-Dri
 | `src/ilp/` | Ligand preparation package and CLI pipeline. |
 | `models/ilp/` | Bundled runtime model checkpoint and tokenizer. |
 | `examples/` | Small smoke-test and discard-report inputs. |
+| `input.csv` | Included benchmark workload used for the runtime numbers below. |
 | `tests/` | Unit tests for batching, one-best selection, and discard tracking. |
 | `Dockerfile` | Reproducible CUDA-capable runtime image. |
 | `CITATION.cff` | Citation metadata for the related paper. |
@@ -101,7 +102,7 @@ Device controls:
 
 ## Benchmarks
 
-Benchmarks on the provided local `input.csv` workload:
+Benchmarks on the included `input.csv` workload, measured on the same machine:
 
 | Metric | Value |
 | --- | --- |
@@ -113,8 +114,8 @@ Benchmarks on the provided local `input.csv` workload:
 
 | Mode | Hardware / command mode | Total runtime |
 | --- | --- | --- |
-| GPU | NVIDIA RTX PRO 2000 Blackwell Generation Laptop GPU, `--gpus all` | `428.3 s` / `7 min 8 s` |
-| CPU | Docker CPU run with `--device cpu` | `1832.4 s` / `30 min 32 s` |
+| GPU | NVIDIA RTX PRO 2000 Blackwell Generation Laptop GPU, `--gpus all` | `59.5 s` |
+| CPU | Docker CPU run with `--device cpu` | about `25 min` |
 
 The CPU and GPU full-output files were byte-identical after deterministic near-tie handling.
 
@@ -142,4 +143,4 @@ docker run --rm --entrypoint python ilp:latest -m unittest discover -s /app/test
 
 The bundled `models/ilp/ilp_model.pt` file is tracked with Git LFS.
 
-Generated pipeline outputs, local `input.csv`, CUDA cache files, and benchmark outputs are ignored by Git.
+Generated pipeline outputs, CUDA cache files, and benchmark outputs are ignored by Git.
