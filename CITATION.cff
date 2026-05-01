@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the related MolAI paper."
+preferred-citation:
+  type: article
+  title: "MolAI: A Deep Learning Framework for Data-Driven Molecular Descriptor Generation and Advanced Drug Discovery Applications"
+  authors:
+    - family-names: Mahdizadeh
+      given-names: Sayyed Jalil
+    - family-names: Eriksson
+      given-names: Leif A.
+  journal: "Journal of Chemical Information and Modeling"
+  year: 2025
+  volume: 65
+  issue: 19
+  start: 9892
+  end: 9909
+  doi: 10.1021/acs.jcim.5c00491
+  url: "https://pubs.acs.org/doi/10.1021/acs.jcim.5c00491"

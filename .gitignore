@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local and generated iLP data products
+SMILES_canonical.csv
+dimorph_canonical.csv
+prepped_SMILES.csv
+out_canonicalizer.txt
+out_dimorphite.txt
+tmp/
+outputs/
+.cuda_cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

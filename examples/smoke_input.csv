@@ -1,0 +1,5 @@
+smiles,id
+COC(=O)C1(C(=O)OC)Cc2ccc3ccccc3c2O1,id1
+CCCCOc1ccc(-c2ccc(C#CC(C)Sc3nc4ccccc4[nH]3)s2)cc1,id2
+CCN1C(=O)C(=O)N(CC(=O)Nc2ccccc2C(F)(F)F)C1=S,id3
+O=C(OCC[NH+]1CCN(c2ccccn2)CC1)c1cc(C(F)(F)F)cc(C(F)(F)F)c1,id4

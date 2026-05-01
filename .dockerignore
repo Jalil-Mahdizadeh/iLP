@@ -1,0 +1,15 @@
+.git
+.gitignore
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.cuda_cache/
+
+# Generated pipeline outputs; the image only needs source, models, and examples.
+*.csv
+out_*.txt
+
+!examples/*.csv

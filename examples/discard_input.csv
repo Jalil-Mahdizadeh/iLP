@@ -1,0 +1,3 @@
+smiles,id
+CCO,valid1
+not_a_smiles,invalid1
